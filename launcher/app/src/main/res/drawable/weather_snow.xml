@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Snow: the same small cloud, with three flakes under it. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp" android:height="20dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M5.4,9 C5.4,7.56 6.56,6.4 8,6.4 C9.44,6.4 10.6,7.56 10.6,9 C10.6,10.44 9.44,11.6 8,11.6 C6.56,11.6 5.4,10.44 5.4,9 Z" />
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M9.3,8 C9.3,6.23 10.73,4.8 12.5,4.8 C14.27,4.8 15.7,6.23 15.7,8 C15.7,9.77 14.27,11.2 12.5,11.2 C10.73,11.2 9.3,9.77 9.3,8 Z" />
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M14.6,9 C14.6,7.67 15.67,6.6 17,6.6 C18.33,6.6 19.4,7.67 19.4,9 C19.4,10.33 18.33,11.4 17,11.4 C15.67,11.4 14.6,10.33 14.6,9 Z" />
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M5.4,9h11.6v2.8c0,0.99 -0.81,1.8 -1.8,1.8H7.2c-0.99,0 -1.8,-0.81 -1.8,-1.8z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M7.05,16.8 C7.05,16.28 7.48,15.85 8,15.85 C8.52,15.85 8.95,16.28 8.95,16.8 C8.95,17.32 8.52,17.75 8,17.75 C7.48,17.75 7.05,17.32 7.05,16.8 Z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M11.55,18 C11.55,17.48 11.98,17.05 12.5,17.05 C13.02,17.05 13.45,17.48 13.45,18 C13.45,18.52 13.02,18.95 12.5,18.95 C11.98,18.95 11.55,18.52 11.55,18 Z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M16.05,16.8 C16.05,16.28 16.48,15.85 17,15.85 C17.52,15.85 17.95,16.28 17.95,16.8 C17.95,17.32 17.52,17.75 17,17.75 C16.48,17.75 16.05,17.32 16.05,16.8 Z" />
+</vector>

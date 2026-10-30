@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF101419"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="72dp"
+        android:paddingEnd="72dp"
+        android:paddingTop="38dp"
+        android:paddingBottom="38dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/launcher_settings"
+            android:textColor="#FFFFFFFF"
+            android:textSize="34sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/columns_label"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView android:id="@+id/columns4" style="@style/SettingsColumnChoice" android:text="4" />
+            <TextView android:id="@+id/columns5" style="@style/SettingsColumnChoice" android:text="5" />
+            <TextView android:id="@+id/columns6" style="@style/SettingsColumnChoice" android:text="6" />
+            <TextView android:id="@+id/columns7" style="@style/SettingsColumnChoice" android:text="7" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="@string/rows_below_dock_label"
+            android:textColor="#FFFFFFFF"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView android:id="@+id/rows0" style="@style/SettingsColumnChoice" android:text="0" />
+            <TextView android:id="@+id/rows1" style="@style/SettingsColumnChoice" android:text="1" />
+            <TextView android:id="@+id/rows2" style="@style/SettingsColumnChoice" android:text="2" />
+            <TextView android:id="@+id/rows3" style="@style/SettingsColumnChoice" android:text="3" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/greetingNameChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/greeting_name_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/statsChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/stats_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/hitokotoChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/hitokoto_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/hitokotoCategoriesChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/hitokoto_categories_help"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/leKeyCategoriesChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/le_key_categories_help"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/homeLeKeyFunctionChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/home_le_key_function_help"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/leKeyFunctionChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/le_key_function_help"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/voiceKeyChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/voice_key_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/libraryButtonChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/library_button_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <!-- How much weather Home draws comes first: it is the switch that decides whether the
+             three rows under it are worth showing at all. -->
+        <TextView
+            android:id="@+id/weatherChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:id="@+id/weatherChoiceHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/weather_mode_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <!-- The weather line under the clock: which city, and the two credentials QWeather needs.
+             They sit right after the switch because that is what they decorate, and they are typed
+             rather than picked - a city name and a key are not a fixed set. -->
+        <TextView
+            android:id="@+id/weatherCityChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/weatherCityHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/weather_city_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/weatherKeyChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:id="@+id/weatherKeyHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/weather_key_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/weatherHostChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/weatherHostHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/weather_host_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/wallpaperChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:id="@+id/animationsChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp" />
+
+        <TextView
+            android:id="@+id/advancedChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/advanced_effects_warning"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/followThemeChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="18dp"
+            android:text="@string/follow_theme" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/follow_theme_hint"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/defaultHomeChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="28dp"
+            android:text="@string/home_settings" />
+
+        <TextView
+            android:id="@+id/defaultHomeHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="@string/home_settings_help"
+            android:textColor="#FFACB8C1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvSettingsChoice"
+            style="@style/SettingsRow"
+            android:layout_marginTop="18dp"
+            android:text="@string/tv_settings" />
+    </LinearLayout>
+</ScrollView>

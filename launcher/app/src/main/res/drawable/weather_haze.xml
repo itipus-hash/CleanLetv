@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Haze: a pale sun half hidden behind two bands. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp" android:height="20dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FFF2D49B"
+        android:pathData="M8.8,9 C8.8,7.23 10.23,5.8 12,5.8 C13.77,5.8 15.2,7.23 15.2,9 C15.2,10.77 13.77,12.2 12,12.2 C10.23,12.2 8.8,10.77 8.8,9 Z" />
+    <path android:fillColor="#FFF2D49B" android:pathData="M11,1.6h2v2.6h-2z" />
+    <path android:fillColor="#FFF2D49B" android:pathData="M3.6,8h2.6v2H3.6z" />
+    <path android:fillColor="#FFF2D49B" android:pathData="M17.8,8h2.6v2h-2.6z" />
+    <path android:fillColor="#FFE9EFF6" android:pathData="M3.6,16.2h16.8v1.4H3.6z" />
+    <path android:fillColor="#FFE9EFF6" android:pathData="M6,20.2h12v1.4H6z" />
+</vector>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rain: a small grey cloud with three slanted drops under it. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp" android:height="20dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M5.4,9 C5.4,7.56 6.56,6.4 8,6.4 C9.44,6.4 10.6,7.56 10.6,9 C10.6,10.44 9.44,11.6 8,11.6 C6.56,11.6 5.4,10.44 5.4,9 Z" />
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M9.3,8 C9.3,6.23 10.73,4.8 12.5,4.8 C14.27,4.8 15.7,6.23 15.7,8 C15.7,9.77 14.27,11.2 12.5,11.2 C10.73,11.2 9.3,9.77 9.3,8 Z" />
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M14.6,9 C14.6,7.67 15.67,6.6 17,6.6 C18.33,6.6 19.4,7.67 19.4,9 C19.4,10.33 18.33,11.4 17,11.4 C15.67,11.4 14.6,10.33 14.6,9 Z" />
+    <path android:fillColor="#FFB9C6D4"
+        android:pathData="M5.4,9h11.6v2.8c0,0.99 -0.81,1.8 -1.8,1.8H7.2c-0.99,0 -1.8,-0.81 -1.8,-1.8z" />
+    <path android:fillColor="#FF7FB2E5" android:pathData="M7.1,14.6L8.3,14.6L9.1,20L7.9,20z" />
+    <path android:fillColor="#FF7FB2E5" android:pathData="M11.6,15.4L12.8,15.4L13.6,20.8L12.4,20.8z" />
+    <path android:fillColor="#FF7FB2E5" android:pathData="M16.1,14.6L17.3,14.6L18.1,20L16.9,20z" />
+</vector>

@@ -1,0 +1,33 @@
+# 换行符统一：shell 脚本和 C 源码在 Windows 上被 checkout 成 CRLF 就会跑不起来
+# （sh 会报 $'\r': command not found，gcc 会把 \r 当语法的一部分）
+* text=auto eol=lf
+
+*.sh text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.py text eol=lf
+*.gradle text eol=lf
+*.java text eol=lf
+*.xml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.kl text eol=lf
+*.pem text eol=lf
+*.properties text eol=lf
+
+# 二进制，不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ttf binary
+*.otf binary
+*.zip binary
+*.jar binary
+*.aar binary
+*.apk binary
+*.so binary
+*.dex binary
+*.jar binary

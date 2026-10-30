@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Secondary lines of a list row (package, signing key). White-ish in every state: the focused row
+     has no fill (input_row_bg), and the row's focused state does not reach its children on this TV. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#73FFFFFF" />
+</selector>

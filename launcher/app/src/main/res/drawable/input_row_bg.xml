@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Focused: a steady outline, never a fill. A solid fill would be the same white as the label
+         and the icon, and the row's focused state never reaches its children on this TV, so the
+         focused row used to read as an empty white bar. -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <corners android:radius="13dp" />
+            <stroke android:width="2dp" android:color="#FFFFFFFF" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <corners android:radius="13dp" />
+        </shape>
+    </item>
+</selector>

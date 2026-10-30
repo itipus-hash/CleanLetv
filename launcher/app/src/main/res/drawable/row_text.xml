@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Label and icon color: white in every state. Focused elements (menu rows via input_row_bg,
+     top-bar pills via pill_bg) show only a steady white outline, never a fill, so there is
+     nothing for the text to contrast against - and on this TV the view's focused state does
+     not reach its children anyway. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#FFFFFFFF" />
+</selector>

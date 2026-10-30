@@ -1,0 +1,51 @@
+# ---- Android / Gradle ----
+launcher/build/
+launcher/app/build/
+launcher/.gradle/
+launcher/local.properties
+.gradle/
+build/
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ---- Python ----
+tools/venv/
+tools/__pycache__/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# ---- IDE ----
+.idea/
+*.iml
+.vscode/
+.settings/
+*.swp
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 本机产物与私有数据 ----
+# 电视端导出的 shared_prefs（含天气 API Key 等凭据，绝不入库）
+*.local.properties
+launcher_settings.xml
+data/
+appdata/
+/backup-*/
+/shots/
+/dbg/shots/
+*.log
+lekeyd.log
+le_playing
+
+# ---- 素材 ----
+# 开机动画含苹果 logo 商标素材，不随本仓库发布
+/bootanim/

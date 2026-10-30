@@ -1,0 +1,64 @@
+本项目（CleanLetv）包含两部分内容，各自适用不同的开源协议：
+
+================================================================================
+第一部分：桌面启动器源码（launcher/ 目录）
+================================================================================
+
+来源：CleanYourTV
+      https://github.com/Gathin23/cleanyourtv
+作者：Gathin23
+原协议：MIT License
+Copyright (c) 2026 Gathin
+
+本项目对 CleanYourTV 进行了大量修改，主要针对乐视电视的固件适配。所有修改后的
+桌面源码同样以 MIT 协议发布，MIT 许可证全文见 launcher/LICENSE。
+
+MIT 协议允许 MIT 许可的代码被并入采用其他协议的项目，因此这些代码可以合法地
+成为本 AGPL-3.0 项目的一部分，同时保留原有的版权声明与 MIT 授权。
+
+随附的 Outfit 字体（launcher/app/src/main/res/font/outfit.ttf）由 The Outfit
+Project Authors 制作，采用 SIL Open Font License 1.1，见
+launcher/FONT-LICENSE-OFL.txt。
+
+================================================================================
+第二部分：每日一言语句库
+================================================================================
+
+文件：launcher/app/src/main/assets/sentences.json
+
+来源：一言开源社区官方语句库 hitokoto-osc/sentences-bundle
+      https://github.com/hitokoto-osc/sentences-bundle
+协议：GNU Affero General Public License v3.0
+      https://github.com/hitokoto-osc/sentences-bundle/blob/master/LICENSE
+
+该语句库被打包进 APK 随应用一同分发。根据 AGPL-3.0 的要求，包含该数据的衍生
+作品必须以 AGPL-3.0 协议发布，因此本项目整体采用 AGPL-3.0。
+
+该语句库并非全部著作权由一言网持有，各条语句的著作权归原作者所有。语句库官方
+说明：「如您是原创句子的作者，这意味着一言是在经过您的确认后获得了拷贝、分发、
+出版、商业使用等长期授予的权限。」若您是语句原作者且不希望该句参与公共分享，
+请联系 i@loli.online。
+
+================================================================================
+第三部分：乐视机型适配脚本与守护进程（scripts/、dbg/、tools/、themes/）
+================================================================================
+
+由本项目作者编写，与本项目整体一致采用 AGPL-3.0。
+
+其中 dbg/kl-backup-orig/*.kl 为乐视电视系统原有的 keylayout 文件副本，仅用于
+记录重映射的原始状态以便还原，属于设备配置文件的备份。
+
+================================================================================
+关于本项目整体协议
+================================================================================
+
+由于打包分发了 AGPL-3.0 的语句库，本项目整体按 AGPL-3.0 发布。
+
+如果你想只使用桌面启动器而不使用内置语句库，可以删除
+launcher/app/src/main/assets/sentences.json。此时 Sentences.java 会在读取资源时
+失败并回退到空内容，每日一言功能不可用，但桌面其余部分不受影响——那一份代码
+适用 MIT 协议。
+
+License: AGPL-3.0
+上游项目 License: MIT (CleanYourTV, Copyright (c) 2026 Gathin)
+语句库 License: AGPL-3.0 (hitokoto-osc/sentences-bundle)
