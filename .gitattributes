@@ -31,3 +31,9 @@
 *.so binary
 *.dex binary
 *.jar binary
+
+# cmd.exe 批处理必须用 CRLF。
+# 上游 CleanYourTV 也有这一条：gradlew.bat 被 checkout 成 LF 后，
+# cmd.exe 在 goto 标签和多行块上会解析出错。
+*.bat text eol=crlf
+*.cmd text eol=crlf
