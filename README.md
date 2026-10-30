@@ -64,6 +64,8 @@
 
 **完整按键映射表**（红外 `Vendor_3697_Product_0001.kl` + 蓝牙 `Vendor_4c65_Product_3d4c.kl`）：
 
+> ⚠️ 这张表描述的是**乐视原装那款带 Le 键的遥控器**。scancode 是遥控器厂商自己定的编号，换一支遥控器要重新核对——尤其是 Le 键那一行，见 [Le 键的遥控器适配边界](#le-键的遥控器适配边界)。
+
 | 遥控器按键 | scancode | 原 keycode | 现 keycode | 桌面行为 |
 |---|---|---|---|---|
 | 设置 | 357 | 176 SETTINGS | 176 | 直接进「桌面设置」 |
@@ -106,6 +108,8 @@ Le 键面板里可以左右方向键翻句：
 
 乐视遥控器上那颗 **Le 键**，被固件劫持成"打开乐视视频"（`startService(com.stv.lekey)` + 启动 `com.letv.tv/.WelcomeActivity`）。本项目把它夺了回来。
 
+> ⚠️ **这颗键只存在于乐视自家那几款带 Le 键的遥控器上**。别的遥控器（第三方通用遥控、旧款遥控、手机 App 虚拟遥控）大多没有这颗实体键，或者它的 scancode 不是 189——本功能对这些遥控器**不生效**。详见 [Le 键的遥控器适配边界](#le-键的遥控器适配边界)。
+
 ![Le 键全局应用库](docs/images/le-in-app.png)
 
 - **在任何 App 里都能唤出**，且**不跳回桌面**——透明 Activity 悬浮在当前 App 之上
@@ -118,6 +122,89 @@ Le 键面板里可以左右方向键翻句：
 **顺带的"避广告"效果**：应用库面板盖上去时，下面的视频 App 会进入 `STOPPED`（不只是 PAUSED），音频轨道直接归零——**这是 App 主动触发的暂停，不会弹暂停广告**。而关闭面板后播放守卫会确认回到了同一个 App 且确实没声音，再补一个媒体播放键，**把视频还给你**。
 
 > 判定"现在到底有没有在播"必须读 `dumpsys media.audio_flinger`——`dumpsys media_session` 的 `state=3` 在这台机器上是**陈旧的**，面板盖上去后 session 还挂着"播放中"而音频轨道早就没了。
+
+### Le 键的遥控器适配边界
+
+这一节回答一个很实际的问题：**我的遥控器没有 Le 键，或者换了别的遥控器，还能用这个功能吗？**
+
+答案是**不能直接用**，但原因分三种，改造难度完全不同。先说结论：
+
+| 你的情况 | 能用吗 | 怎么改 |
+|---|---|---|
+| 用乐视原装那款**带 Le 键**的遥控器 | ✅ 开箱即用 | 不用改 |
+| 遥控器**没有** Le 这颗物理键 | ❌ 无法唤起 | 换遥控器，或改用别的键（见下） |
+| 遥控器**有**类似功能的键，但 scancode 不是 189 | ⚠️ 要改代码 + 改 keylayout | 见 [下面那段](#改成你自己的键) |
+
+**为什么判定标准是 scancode 189，而不是"看着像 Le 键"**
+
+桌面和 `lekeyd` 守护进程**都只认 scancode 189**，一个键都不放过：
+
+- `MainActivity.LE_SCANCODE_LE = 189`（`launcher/app/src/main/java/com/gathin/tvhome/MainActivity.java`）
+- `lekeyd.c` 里的 `#define SCAN_LE 189`（`dbg/lekeyd/lekeyd.c`）
+
+而 189 这个号来自**遥控器自己在 keylayout 里的定义**。本机两份 keylayout 都有这一行：
+
+```kl
+# dbg/kl-backup-orig/Vendor_3697_Product_0001.kl   （红外接收器）
+key 189   LE
+
+# dbg/kl-backup-orig/Vendor_4c65_Product_3d4c.kl   （蓝牙遥控键盘）
+key 189   LE
+```
+
+**换一支遥控器，可能出三种岔子：**
+
+1. **物理上没有这颗键** — 第三方通用遥控器、Android TV 迷你遥控器、手机 App 虚拟遥控基本都没有。它压根不会发 189 这个码，功能无从谈起。**这种最常见，也最没办法**——除非改用别的键。
+2. **有这颗键，但 scancode 不同** — 遥控器厂商自己给键位编号，乐视这套 189 是乐视遥控器的约定。别的厂商可能编成 200、232……数字本身毫无含义，**只能实测**。
+3. **scancode 对了，但 keylayout 文件名变了** — 键盘布局是按**输入设备**（红外接收器 / 蓝牙键盘的 Vendor_Product）挑文件的。换了遥控器，如果它枚举成另一个设备，`fixkl.sh` 里写死的那两个文件名就改不到它，`.kl` 不会被重映射，固件照样吃键。
+
+**怎么确认自己的遥控器发的是哪个 scancode**
+
+先把 `getevent` 跑起来，再按那颗键：
+
+```bash
+adb shell getevent -lt /dev/input/event0     # 红外；蓝牙遥控器一般是 event2
+# 按一下目标键，看输出里的 value
+```
+
+`getevent -l` 打印的是 **MSC_SCAN**（USB HID 层编码，如 `0x7003c`），**不是** scancode——`.kl` 文件里写的 `key N` 那个 N 才是 scancode。想看 scancode，对照 `/system/usr/keylayout/` 下你这台设备实际加载的那个 `.kl` 文件，里面 `key N` 行就是。
+
+> ⚠️ 别用 `getevent` 的输出直接去改 `.kl`：`getevent` 打印的 `code` 是 MSC_SCAN，跟 `key N` 差一个转换层。这坑踩过一次，见 [docs/开发文档.md §4.1](docs/开发文档.md)。
+
+#### 改成你自己的键
+
+如果你手上那支遥控器有颗**想拿来当应用库键**的实体键（比如某个空闲的 F 键、或者一颗你用不上的功能键），改造分四步：
+
+**① 确认那颗键的 scancode**
+
+```bash
+adb shell getevent -lt /dev/input/event2
+# 按那颗键，记下 MSC_SCAN；再对照 .kl 文件确认它当前映射成什么
+```
+
+**② 改 `.kl` 把它换成固件不拦的 keycode**
+
+在 `scripts/fixkl.sh` 的循环里加一行（`<SC>` 换成实际 scancode，`<KC>` 换成目标 keycode）：
+
+```sh
+sed -i 's/^key <SC>[[:space:]].*$/key <SC>     <KC>/' /system/usr/keylayout/$f.kl
+```
+
+目标 keycode 选 **F5（135）** 或 **F6（136）** 这类：框架对它们没有特殊分支，固件的拦截匹配不上，也几乎没有电视 App 绑定它们。**别选 MENU（82）**——聚焦中的 App 会把它吃掉变成它自己的选项菜单（这个坑本项目第一版就踩了）。
+
+**③ 改桌面和守护进程的常量**
+
+| 文件 | 改动 |
+|---|---|
+| `launcher/app/src/main/java/com/gathin/tvhome/MainActivity.java` | `LE_SCANCODE_LE = 189` → 你的 scancode |
+| `launcher/app/src/main/java/com/gathin/tvhome/HomeKeyService.java` | 用的是 `MainActivity.LE_SCANCODE_LE`，跟着走，不用单独改 |
+| `dbg/lekeyd/lekeyd.c` | `#define SCAN_LE 189` → 你的 scancode |
+
+**④ 重新编译、推送、重启**
+
+`.kl` 开机只读一次，**改完必须重启**才生效。
+
+> 💡 顺带一提：**设置键**和**输入源键**的 scancode 是**可配置**的（`settings_key_scancodes` / `input_source_scancodes`，见 `themes/README.md`），不用改代码。只有 **Le 键**是硬编码的，所以它对遥控器型号最敏感。
 
 ---
 
@@ -151,7 +238,7 @@ Le 键面板里可以左右方向键翻句：
 | **天气**（和风天气） | ❌ 不需要 | ✅ 完全可用（需在桌面设置里填 API Key） |
 | **无障碍服务占住设置键** | ⚠️ 半需要 | `settings put secure` 普通 shell 就能写，但 `pm install -r` 会清空无障碍设置，得手动重开 |
 | **改键位映射**（设置键 / 菜单键 / Le 键 / 语音键） | ✅ **必须** | ❌ 固件的 `PhoneWindowManager` 在框架层按 keycode 吃键，桌面**收不到任何按键事件**。只能改 `/system/usr/keylayout/*.kl`，那要 root |
-| **Le 键全局应用库**（在任何 App 里唤出） | ✅ **必须** | ❌ 需要 root 守护进程 `lekeyd` 直读 `/dev/input`（原因见下） |
+| **Le 键全局应用库**（在任何 App 里唤出） | ✅ **必须** | ❌ 需要 root 守护进程 `lekeyd` 直读 `/dev/input`（原因见下）。⚠️ 另外还要求你的遥控器**有 Le 键且 scancode 是 189**，见 [Le 键的遥控器适配边界](#le-键的遥控器适配边界) |
 | **关面板后视频续播** | ✅ **必须** | ❌ 依赖 root 守护进程里的 `leplay.sh` 播放守卫 |
 | **修复设置键被乐视抽屉盖住** | ✅ **必须** | ❌ 要 `su -c 'pm disable com.stv.globalsetting'`，系统包不接受普通 shell 的 `pm disable` |
 | **禁用原厂乐视桌面** | ✅ **必须** | ❌ 要 `su -c 'pm disable-user'`，否则桌面被强杀时按键落回乐视界面 |
@@ -207,6 +294,22 @@ Le 键面板里可以左右方向键翻句：
 - **第一批发布的 938Mstar 系统都支持**；**第二次带 M、N 的电视不支持**。
 - ⚠️ 这段描述针对的是**底包**。**精简包是另一回事**——它不按这个机型列表划界，能不能用得看自己的机器（精简包刷完桌面只剩几个图标，等于换了一套系统，很多机型反而都能跑）。
 - 你的机器不在列表里的话，**别硬刷**。先确认芯片型号再说。
+
+### 遥控器要求
+
+> 这一节和上面的刷机范围**无关**——底包/精简包划的是机型，这里划的是**遥控器**。
+
+本项目的按键相关功能（改键位映射、Le 键全局应用库）依赖**乐视遥控器上的实体按键**，尤其是那颗 **Le 键**：
+
+| 遥控器 | 情况 |
+|---|---|
+| 乐视原装**带 Le 键**的遥控器（本机实测的红外 `Vendor_3697_Product_0001` / 蓝牙 `Vendor_4c65_Product_3d4c`） | ✅ 直接可用，scancode 189 |
+| 第三方通用遥控、Android TV 迷你遥控器、手机 App 虚拟遥控 | ❌ 通常**没有** Le 这颗物理键，功能不生效 |
+| 有类似功能的键，但 scancode 不是 189 | ⚠️ 需要改代码 + 改 keylayout 才能用 |
+
+判定标准是 **scancode 189**（不是"看着像"）：桌面 `MainActivity.LE_SCANCODE_LE` 和守护进程 `lekeyd.c` 的 `#define SCAN_LE` 都只认这个号。完整的排查与改造步骤见 [Le 键的遥控器适配边界](#le-键的遥控器适配边界)。
+
+> 💡 换句话说：**乐视这个 Le 键功能是"这台机器 + 这款遥控器"的组合，不是所有遥控器的通用功能。**没有 root 拿不到的那部分功能，请以 [没有 root 会怎样](#没有-root-会怎样) 那张表为准。
 
 ### 操作要点（摘自教程）
 
@@ -271,6 +374,12 @@ CleanLetv/
 - 一台乐视电视（Android 6.0 / SDK 23 及以上；实测机型 X4-65S）
 - ADB 已开启（网络 ADB 5555 或 USB）
 - 本机装了 Android SDK 与 JDK 17+
+
+**遥控器**（要按键相关功能才需要）：
+
+- **Le 键全局应用库**要求遥控器**有 Le 这颗物理键且 scancode 是 189**——乐视原装那款遥控器满足，第三方遥控器大多不满足。
+- 改键位映射（设置键 / 菜单键 / 语音键）同理，scancode 同样按遥控器型号而定。
+- 详见 [Le 键的遥控器适配边界](#le-键的遥控器适配边界)。
 
 **root（看你要哪些功能）**：
 
